@@ -21,3 +21,15 @@ jobs:
     - uses: isbang/compose-action@v1.3.2
       with:
         compose-file: "./docker-compose.yml"
+
+    - name: Create tag
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.git.createRef({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            ref: 'refs/tags/$(date +%s)',
+            sha: context.sha
+          })
