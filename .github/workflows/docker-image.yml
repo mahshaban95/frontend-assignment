@@ -38,7 +38,7 @@ jobs:
     #     Tag: $(date +'%Y%m%d.%H%M%S')
 
     - name: set env
-      run: echo "::set-env name=NOW::v$(date +'%Y%m%d.%H%M%S')"
+      run: echo "NOW=v$(date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV
 
     - name: Create tag
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
