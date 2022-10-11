@@ -27,10 +27,10 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
-          echo "::set-env name=NOW::refs/tags/v$(date +'%Y%m%d.%H%M%S')"
+          echo "NOW=efs/tags/v$(date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: ${{ env.NOW }},
+            ref: ${NOW},
             sha: context.sha
           })
