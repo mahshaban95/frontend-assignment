@@ -31,6 +31,8 @@ jobs:
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: ${{ NOW }},
+            ref: $Tag ,
             sha: context.sha
           })
+        env:
+          Tag: $(date +'%Y%m%d.%H%M%S')
