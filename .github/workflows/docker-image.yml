@@ -22,17 +22,26 @@ jobs:
     #   with:
     #     compose-file: "./docker-compose.yml"
 
+    # - name: Create tag
+    #   if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    #   uses: actions/github-script@v6
+    #   with:
+    #     script: |
+    #       echo "NOW=efs/tags/v$(date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV
+    #       github.rest.git.createRef({
+    #         owner: context.repo.owner,
+    #         repo: context.repo.repo,
+    #         ref: ${{ Tag }} ,
+    #         sha: context.sha
+    #       })
+    #   env:
+    #     Tag: $(date +'%Y%m%d.%H%M%S')
+
+    - name: set env
+      run: echo "::set-env name=NOW::v$(date +'%Y%m%d.%H%M%S')"
+
     - name: Create tag
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      uses: actions/github-script@v6
+      uses: ncipollo/release-action@v1
       with:
-        script: |
-          echo "NOW=efs/tags/v$(date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV
-          github.rest.git.createRef({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            ref: ${{ Tag }} ,
-            sha: context.sha
-          })
-      env:
-        Tag: $(date +'%Y%m%d.%H%M%S')
+        tag: ${{ env.NOW }}
