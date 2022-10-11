@@ -34,5 +34,5 @@ jobs:
             ref: $Tag ,
             sha: context.sha
           })
-        env:
-          Tag: Mah
+      env:
+        Tag: $(date +'%Y%m%d.%H%M%S')
