@@ -15,12 +15,12 @@ jobs:
 
     - uses: actions/checkout@v3
 
-    # - name: Build the Docker image
-    #   run: docker build . --file Dockerfile --tag myapp:$(date +%s)
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag myapp:$(date +%s)
 
-    # - uses: isbang/compose-action@v1.3.2
-    #   with:
-    #     compose-file: "./docker-compose.yml"
+    - uses: isbang/compose-action@v1.3.2
+      with:
+        compose-file: "./docker-compose.yml"
 
     - name: Set the Tag as an env variable
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
