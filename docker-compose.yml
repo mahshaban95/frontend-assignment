@@ -4,9 +4,12 @@ services:
     image: postgres:9.6
     ports:
       - "5432:5432"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_DB: fe_app_development
   web:
-    build: .
-    command: /bin/sh -c "rm -f /myapp/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    image: mahshaban95/frontend-assignment_web:1.0
+    # command: /bin/sh -c "rm -f /myapp/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0' && bin/rails db:migrate RAILS_ENV=development"
     volumes:
       - .:/myapp
     ports:
