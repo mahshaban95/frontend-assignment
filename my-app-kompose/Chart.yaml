@@ -1,0 +1,8 @@
+name: my-app-kompose
+description: A generated Helm Chart for my-app-kompose from Skippbox Kompose
+version: 0.0.1
+apiVersion: v1
+keywords:
+  - my-app-kompose
+sources:
+home:
